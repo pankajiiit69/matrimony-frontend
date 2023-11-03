@@ -5,7 +5,6 @@ import CardsContainer from './CardsContainer';
 function About() {
     return (
         <div>
-            <Header />
             About page Comming Soon
         </div>
     );

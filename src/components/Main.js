@@ -3,10 +3,9 @@ import Section from './Section';
 import CardsContainer from './CardsContainer';
 import Header from './Header';
 
-function Main() {
+function Main({authToken}) {
     return (
         <main >
-            <Header/>
             <Section/>
             <CardsContainer />
         </main >

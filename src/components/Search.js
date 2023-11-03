@@ -6,7 +6,6 @@ function Search() {
     return (
 
         <div>
-            <Header />
             Search  comming soon...
         </div>
     );
