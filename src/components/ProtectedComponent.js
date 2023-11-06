@@ -14,3 +14,6 @@ export default function ProtectedComponent({ authToken, setAuthToken, component:
         authToken ? <Component authToken={authToken} /> : <></>
     );
 }
+
+
+

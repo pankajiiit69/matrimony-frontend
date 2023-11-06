@@ -70,7 +70,7 @@ export default function CreateProfile({ setFlow, authToken}) {
                                                             <label htmlFor="fullname" className="col-form-label">Name:</label>
                                                         </div>
                                                         <div className="col-9">
-                                                            <input placeholder="Full Name" required type="text" name="fullname" className="form-control form-control-lg" value={formData.fullname} onChange={onChange} />
+                                                            <input placeholder="Full Name" type="text" name="fullname" className="form-control form-control-lg" value={formData.fullname} onChange={onChange} />
                                                         </div>
                                                     </div>
 

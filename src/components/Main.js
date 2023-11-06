@@ -7,7 +7,7 @@ function Main({authToken}) {
     return (
         <main >
             <Section/>
-            <CardsContainer />
+            <CardsContainer authToken={authToken} />
         </main >
     );
 }
