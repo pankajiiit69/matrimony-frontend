@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import Axios from 'axios';
 
-export default function MyCard({ matchingProfile, authToken }) {
+export default function MyCard({ profile, status, authToken }) {
 
     const [connectRequest, setConnectRequest] = useState({
-        brideMatchId: matchingProfile._id,
+        matchProfileId: profile._id,
         status: "PENDING",
         isVerified: true
     });
 
-    console.log('PRINTING' + JSON.stringify(matchingProfile));
+    console.log(`PRINTING ${profile.fullname}, status:${status}`);
 
     const handleConnectRequest = (e) => {
         Axios.post('http://localhost:3002/profile/matchRequest',
@@ -33,12 +33,14 @@ export default function MyCard({ matchingProfile, authToken }) {
     return (
         <div className="card">
             <div className="card-body">
-                <h5 className="card-title">{matchingProfile.fullname}</h5>
-                <h6 className="card-subtitle mb-2 text-body-secondary">{matchingProfile.gender}- {matchingProfile.isConnected}</h6>
-                <p className="card-text">{matchingProfile.address}</p>
+                <h5 className="card-title">{profile.fullname}</h5>
+                <h6 className="card-subtitle mb-2 text-body-secondary">{profile.gender}</h6>
+                <p className="card-text">{profile.address}</p>
                 <p>
-                {matchingProfile.isConnected && 
+                {!status && 
                     <button type="button" onClick={handleConnectRequest} className="btn btn-primary">Connect</button> }
+                {status && 
+                    <button disabled type="button" className="btn btn-secondary">{status}</button> }
                     <button type="button" className="btn btn-danger">Ignore</button>
                 </p>
             </div>

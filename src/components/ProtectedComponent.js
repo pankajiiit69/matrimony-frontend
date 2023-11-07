@@ -1,17 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Login from './Login';
+import { UserAuthContext } from '../context/UserAuthContext';
 
-export default function ProtectedComponent({ authToken, setAuthToken, component: Component }) {
+export default function ProtectedComponent({ component: Component }) {
+    const {auth} = React.useContext(UserAuthContext);
     let navigate = useNavigate();
 
     React.useEffect(() => {
-        if (!authToken) {
+        if (!auth?.authToken) {
             navigate('/login');
         }
     }, []);
     return (
-        authToken ? <Component authToken={authToken} /> : <></>
+        auth?.authToken ? <Component/> : <></>
     );
 }
 

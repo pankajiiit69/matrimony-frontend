@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { UserAuthContext } from '../context/UserAuthContext';
 import Axios from 'axios';
 
 const Login = (props) => {
+  const {auth, setAuth} = useContext(UserAuthContext);
   const [credentials, setCredentials] = useState({ username: "", password: "" })
   let navigate = useNavigate();
 
@@ -12,8 +14,11 @@ const Login = (props) => {
     Axios.post(`http://localhost:3002/user/login`, { ...credentials })
       .then(response => {
         console.log(response); // handle success response from server
-        localStorage.setItem('matrimonial_auth_token', response.data.token);
+        localStorage.setItem('matrimonial_auth_token', `Bearer ${response.data.token}`);
         localStorage.setItem('username', credentials.username);
+        const newAuth = {user:{fullname:credentials.username}, authToken:localStorage.getItem("matrimonial_auth_token")};
+        console.info(`User Logged in : ${JSON.stringify(newAuth)}`);
+        setAuth({...auth, ...newAuth});
         setTimeout(() => {
           navigate("/");
           //window.location.reload(true);

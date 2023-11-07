@@ -3,8 +3,10 @@ import ViewProfile from './ViewProfile';
 import CreateProfile from './CreateProfile';
 import UpdateProfile from './UpdateProfile';
 import Axios from 'axios';
+import { UserAuthContext } from '../context/UserAuthContext';
 
-export default function MyProfile({ authToken }) {
+export default function MyProfile() {
+    const {auth} = React.useContext(UserAuthContext);
 
     const [flow, setFlow] = useState('View');
 
@@ -12,7 +14,7 @@ export default function MyProfile({ authToken }) {
     useEffect(() => {
         Axios.get('http://localhost:3002/profile/getMyProfile', {
             headers: {
-                Authorization: authToken
+                Authorization: auth?.authToken
             }
         }).then(resp =>{
             setProfile(resp.data);
@@ -30,9 +32,9 @@ export default function MyProfile({ authToken }) {
         <>
             {profile
                 ? flow === 'Update'
-                    ? <UpdateProfile setFlow={setFlow} profile={profile} authToken={authToken} />
+                    ? <UpdateProfile setFlow={setFlow} profile={profile} authToken={auth?.authToken} />
                     : <ViewProfile setFlow={setFlow} profile={profile} />
-                : <CreateProfile setFlow={setFlow} profile={profile} authToken={authToken} />}
+                : <CreateProfile setFlow={setFlow} profile={profile} authToken={auth?.authToken} />}
         </>
     );
 }
