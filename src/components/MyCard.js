@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import Axios from 'axios';
+import { useDispatch } from 'react-redux'
+import UPDATE_SENT from '../actions/myActions'
 
 export default function MyCard({ profile, status, authToken }) {
+
+    
+    const dispatch = useDispatch()
 
     const [connectRequest, setConnectRequest] = useState({
         matchProfileId: profile._id,
@@ -23,6 +28,7 @@ export default function MyCard({ profile, status, authToken }) {
             .then((resp) => {
                 //console.log(resp);
                 console.info('Connect Request Sent successfully.');
+                dispatch(UPDATE_SENT);
                 //setFlow('Updated');
                 //setLoginToken(resp.data.token);
             }).catch(error => {

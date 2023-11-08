@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import { getMyProfile } from '../service/ProfileService';
+import React from 'react';
 
 export default function ViewProfile({ setFlow, profile }) {
 

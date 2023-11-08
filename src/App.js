@@ -12,26 +12,32 @@ import MyProfile from './components/MyProfile';
 import ProtectedComponent from './components/ProtectedComponent';
 import { UserAuthContext } from './context/UserAuthContext';
 
+import { Provider } from 'react-redux'
+import myStore from './store/myStore'
+
+
 function App() {
-    const [auth, setAuth] = useState({user:{fullname:localStorage.getItem('username')}, authToken:localStorage.getItem("matrimonial_auth_token")});
+    const [auth, setAuth] = useState({ user: { fullname: localStorage.getItem('username') }, authToken: localStorage.getItem("matrimonial_auth_token") });
     return (
         <>
-        <p>{`Auth: ${auth.user?'YES':'NO'}`}</p>
+            <p>{`Auth: ${auth.user ? 'YES' : 'NO'}`}</p>
             <UserAuthContext.Provider value={{ auth, setAuth }}>
-                <Header />
-                <BrowserRouter>
-                    <Routes>
-                        <Route path='/' element={<Main />}></Route>
-                        <Route path='/register' element={<SignUp />}></Route>
-                        <Route path='/login' element={<Login />}></Route>
-                        <Route path='/search' element={<Search />}></Route>
-                        {/* <Route path='/myProfile' element={authToken ? <MyProfile authToken={authToken} />: <Login callback={setAuthToken} />}></Route> */}
-                        <Route path='/myProfile' element={<ProtectedComponent component={MyProfile} />}></Route>
-                        {/* <Route path='/myProfile' element={<UserProfile authToken={authToken}/>}></Route> */}
-                        <Route path='/about' element={<About />}></Route>
-                    </Routes>
-                </BrowserRouter>
-                <Footer />
+                <Provider store={myStore}>
+                    <Header />
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path='/' element={<Main />}></Route>
+                            <Route path='/register' element={<SignUp />}></Route>
+                            <Route path='/login' element={<Login />}></Route>
+                            <Route path='/search' element={<Search />}></Route>
+                            {/* <Route path='/myProfile' element={authToken ? <MyProfile authToken={authToken} />: <Login callback={setAuthToken} />}></Route> */}
+                            <Route path='/myProfile' element={<ProtectedComponent component={MyProfile} />}></Route>
+                            {/* <Route path='/myProfile' element={<UserProfile authToken={authToken}/>}></Route> */}
+                            <Route path='/about' element={<About />}></Route>
+                        </Routes>
+                    </BrowserRouter>
+                    <Footer />
+                </Provider>
             </UserAuthContext.Provider>
 
         </>

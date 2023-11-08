@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
-import { getMyProfile } from '../service/ProfileService';
 
 export default function UpdateProfile({ setFlow, profile, authToken }) {
 
@@ -19,7 +18,7 @@ export default function UpdateProfile({ setFlow, profile, authToken }) {
         food_habbit: profile.food_habbit
     });
 
-    const onChange2 = (event, obj, obj2) => {
+    /* const onChange = (event, obj, obj2) => {
         const { name, value } = event.target;
 
         setFormData((prevFormData) => {
@@ -29,7 +28,7 @@ export default function UpdateProfile({ setFlow, profile, authToken }) {
                 ...prevFormData//,//[name]: value
             })
         });
-    };
+    }; */
 
     const onChange = (event) => {
         const { name, value } = event.target;
@@ -37,7 +36,7 @@ export default function UpdateProfile({ setFlow, profile, authToken }) {
         setFormData({ ...formData, [name]: value });
     }
 
-    const editableFields = ['fullname', 'gender', 'city'];
+    //const editableFields = ['fullname', 'gender', 'city'];
 
 
     const handleSubmit = (userAction) => {

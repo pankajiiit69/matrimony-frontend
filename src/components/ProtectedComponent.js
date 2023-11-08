@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Login from './Login';
 import { UserAuthContext } from '../context/UserAuthContext';
 
 export default function ProtectedComponent({ component: Component }) {
